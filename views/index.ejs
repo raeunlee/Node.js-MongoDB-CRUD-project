@@ -5,6 +5,7 @@
   <title>MY APP</title>
 </head>
 <body>
+  <script src="/main.js"></script>
   <h1> CRUD를 연습중이란다 </h1>
 <form action="/quotes" method="POST">
   <input type="text" placeholder="name" name="name">
@@ -23,6 +24,14 @@
     </li>
   <% } %>
 </ul>
+
+<div>
+  <div>
+    <h2>Let's Update!</h2>
+    <button id="update-button">Replace someone's quote</button>
+  </div>
+</div>
+
 </form>
 </body>
 </html>
