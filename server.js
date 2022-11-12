@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const bodyParser= require('body-parser'); 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://user:fkdmsfkdms19@cluster0.3bwgfru.mongodb.net/?retryWrites=true&w=majority'
+const url = 'mongodb+srv://user:<password>@cluster0.3bwgfru.mongodb.net/?retryWrites=true&w=majority'
 
-
+//app.use('/api', createProxyMiddleware({ target: 'http://www.example.org:9000', changeOrigin: true }));
 app.listen(3000, function() {
   console.log('listening on 3000')
 })
@@ -35,19 +36,20 @@ MongoClient.connect(url, {
   })
 
 
-app.get('/', (req, res) => {
+  app.get('/', (req, res) => {
     const cursor = db.collection('quotes').find().toArray()
     .then(results => {
       res.render('index.ejs', { quotes: results })
     })
     .catch(error => console.error(error))
   })
-app.use(bodyParser.json())
+  
+  app.use(bodyParser.json())
 
-//PUT method로 put request 처리
-app.put('/quotes', (req, res) => {
+  //PUT method로 put request 처리
+  app.put('/quotes', (req, res) => {
   quotesCollection.findOneAndUpdate(
-    { name: 'lemon' },
+    { name: 'hihi' },
     {
       $set: {
         name: req.body.name, //아까 main.js에서 PUT한 name, quote
