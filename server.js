@@ -3,9 +3,8 @@ const app = express();
 const { createProxyMiddleware } = require('http-proxy-middleware');
 const bodyParser= require('body-parser'); 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://user:<password>@cluster0.3bwgfru.mongodb.net/?retryWrites=true&w=majority'
+const url = 'mongodb+srv://user:fkdmsfkdms19@cluster0.3bwgfru.mongodb.net/?retryWrites=true&w=majority'
 
-//app.use('/api', createProxyMiddleware({ target: 'http://www.example.org:9000', changeOrigin: true }));
 app.listen(3000, function() {
   console.log('listening on 3000')
 })
@@ -35,6 +34,7 @@ MongoClient.connect(url, {
       .catch(error => console.error(error))
   })
 
+  app.use('/quotes', createProxyMiddleware({ target: 'http://www.example.org', changeOrigin: true }));
 
   app.get('/', (req, res) => {
     const cursor = db.collection('quotes').find().toArray()
